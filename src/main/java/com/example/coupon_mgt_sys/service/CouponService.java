@@ -2,12 +2,16 @@ package com.example.coupon_mgt_sys.service;
 
 import com.example.coupon_mgt_sys.entity.Coupon;
 import com.example.coupon_mgt_sys.repository.CouponRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CouponService {
@@ -71,9 +75,10 @@ public class CouponService {
     }
 
     public Flux<CouponInfo> getAllCouponsInfo() {
-        return couponRepository.findAll()
+        return couponRepository.findAll()  // Assuming this returns a Flux<Coupon>
                 .map(this::convertToCouponInfo);
     }
+
 
     private CouponInfo convertToCouponInfo(Coupon coupon) {
         boolean isClaimed = coupon.getDeviceId() != null;
@@ -86,8 +91,12 @@ public class CouponService {
                 coupon.getExpiryTime()
         );
     }
-
+    @Setter
+    @Getter
     public static class CouponInfo {
+
+        @Setter
+        @Getter
         private String couponCode;
         private String deviceId;
         private boolean claimed;
@@ -103,6 +112,6 @@ public class CouponService {
             this.expiryDate = expiryDate;
         }
 
-        // Getters and setters (omitted for brevity)
+
     }
 }

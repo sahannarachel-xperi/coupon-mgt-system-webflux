@@ -2,7 +2,9 @@ package com.example.coupon_mgt_sys.controller;
 
 import com.example.coupon_mgt_sys.entity.Coupon;
 import com.example.coupon_mgt_sys.service.CouponService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -35,9 +37,12 @@ public class CouponController {
     }
 
     @GetMapping("/all")
-    public Flux<CouponService.CouponInfo> getAllCouponsInfo() {
-        return couponService.getAllCouponsInfo();
+    @Operation(summary = "Display all coupons")
+    public ResponseEntity<Flux<CouponService.CouponInfo>> getAllCouponsInfo() {
+        Flux<CouponService.CouponInfo> couponsInfo = couponService.getAllCouponsInfo();
+        return ResponseEntity.ok(couponsInfo);
     }
+
 
     static class ClaimRequest {
         private String deviceId;
