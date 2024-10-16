@@ -1,0 +1,203 @@
+########################################################
+# Headers info                                         #
+# Note: Use Indentation - No space indent is required. #
+########################################################
+openapi: '3.0.0'
+info:
+  description: This is the REST API for the Coupon Management Service.
+  version: 1.0.0
+  title: Coupon Management API
+  contact:
+    email: sahannarachel.john@xperi.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+########################################################
+# Tags Definitions                                     #
+# Note: Use Indentation - No space indent is required. #
+########################################################
+tags:
+  - name: coupons
+    description: >-
+      Endpoint that returns/processes information about coupons, including 
+      creating, claiming, and checking the status of coupons.
+paths:
+
+    ########################################################
+    # Coupons Paths Definitions                             #
+    # Note: 4 space indentation is required.                #
+    ########################################################
+    /v1/coupons:
+      post:
+        summary: Store a new coupon
+        operationId: storeCoupon
+        tags:
+          - coupons
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coupon'
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  type: string
+
+
+    /v1/coupons/claim:
+      get:
+        summary: To Claim a Coupon
+        operationId: claimCoupon
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimRequest'
+        responses:
+          '200':
+            description: Coupon claimed successfully
+            content:
+              application/json:
+                schema:
+                  type: string
+
+    /v1/coupons/{couponCode}/status:
+      get:
+        summary: Get coupon status
+        operationId: getCouponStatus
+        tags:
+          - coupons
+        parameters:
+          - $ref: '#/components/parameters/couponCodeParamRequired'
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  type: string
+
+    /v1/coupons/device/{deviceId}/status:
+      get:
+        summary: Get device status
+        operationId: getDeviceStatus
+        tags:
+          - coupons
+        parameters:
+          - $ref: '#/components/parameters/deviceIdParamRequired'
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  type: string
+
+    /v1/coupons/all:
+      get:
+        summary: Get all coupons info
+        operationId: getAllCouponsInfo
+        tags:
+          - coupons
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CouponInfo'
+components:
+
+############### DO NOT CHANGE ######################
+# Note: Used Indentation - 2 space indent is used. #
+####################################################
+  parameters:
+
+    ########################################################
+    # Coupon Common Parameters Definitions                  #
+    # Note: Use Indentation - 4 space indent is required.  #
+    ########################################################
+    couponCodeParamRequired:
+      in: path
+      name: couponCode
+      required: true
+      schema:
+        type: string
+        maxLength: 64
+      description: The unique code of the coupon.
+
+    deviceIdParamRequired:
+      in: path
+      name: deviceId
+      required: true
+      schema:
+        type: string
+        maxLength: 1024
+      description: The deviceId of the object claiming the coupon.
+
+############### DO NOT CHANGE ######################
+# Note: Used Indentation - 2 space indent is used. #
+####################################################
+  schemas:
+
+    ########################################################
+    # Session Schema Definitions                           #
+    # Note: Use Indentation - 4 space indent is required.  #
+    ########################################################
+    Coupon:
+      description: >-
+        Details about the coupon.
+      type: object
+      required:
+        - couponCode
+      properties:
+        couponCode:
+          type: string
+          description: Unique code of the coupon.
+        expiryDate:
+          type: string
+          format: date-time
+          description: Expiry date and time of the coupon.
+
+    ClaimRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: ID of the device claiming the coupon
+      required:
+        - deviceId
+
+    CouponInfo:
+      type: object
+      properties:
+        couponCode:
+          type: string
+          description: Unique code for the coupon
+        deviceId:
+          type: string
+          description: ID of the device that claimed the coupon
+        claimed:
+          type: boolean
+          description: Whether the coupon has been claimed
+        expired:
+          type: boolean
+          description: Whether the coupon has expired
+        expiryDate:
+          type: string
+          format: date-time
+          description: Expiration date of the coupon
+
+
+
+
