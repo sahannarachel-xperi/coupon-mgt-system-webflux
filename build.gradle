@@ -61,25 +61,25 @@ tasks.named("jar") {
 dependencies {
 	// Spring dependencies
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 
-	implementation platform('software.amazon.awssdk:bom:2.20.26')
+	//Dynamodb dependencies
 	implementation 'software.amazon.awssdk:dynamodb-enhanced'
 	implementation 'software.amazon.awssdk:dynamodb'
 
-
-
+	//Spring web flux dependencies
 	implementation 'io.projectreactor:reactor-core'
-
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${SPRINGDOC_VERSION}"
+
 	// OpenAPI and Swagger dependencies
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 
 	// AWS SDK v1
 	implementation "com.amazonaws:aws-java-sdk-dynamodb:1.12.529"
+	implementation platform('software.amazon.awssdk:bom:2.20.26')
 
 	// Lombok
 	compileOnly "org.projectlombok:lombok:$LOMBOK_VERSION"

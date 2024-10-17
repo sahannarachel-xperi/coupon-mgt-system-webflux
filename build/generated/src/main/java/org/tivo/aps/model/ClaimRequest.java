@@ -19,7 +19,7 @@ import jakarta.annotation.Generated;
  * ClaimRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-16T14:22:08.113301+05:30[Asia/Kolkata]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-17T14:50:24.007967+05:30[Asia/Kolkata]")
 public class ClaimRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
