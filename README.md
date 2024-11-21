@@ -117,32 +117,3 @@ The Coupon Management Service is a RESTful API designed to manage coupon codes w
     minikube service coupon-app --url
     ```
 
-## Running Locally
-
-To run the application locally without Docker or Kubernetes, use the command:
-
-```bash
-./gradlew bootRun
-```
-
-The application will be accessible at `http://localhost:8080`.
-
-### API Documentation
-
-The API documentation is generated using Swagger/OpenAPI. You can access it at:
-
-```bash
-http://localhost:8080/v3/api-docs
-```
-
-## License
-
-This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
-
-## Contact
-
-For any inquiries, please contact:
-
-- **Name**: Sahanna Rachel
-- **Email**: sahannarachel.john@xperi.com
-- **GitHub**: [sahannarachel-xperi](https://github.com/sahannarachel-xperi)
