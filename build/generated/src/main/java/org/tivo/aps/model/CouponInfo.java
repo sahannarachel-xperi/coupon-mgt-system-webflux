@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * CouponInfo
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-17T14:50:24.007967+05:30[Asia/Kolkata]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-11-21T10:10:09.144410+05:30[Asia/Kolkata]")
 public class CouponInfo implements Serializable {
 
   private static final long serialVersionUID = 1L;

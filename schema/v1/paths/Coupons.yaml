@@ -20,8 +20,11 @@
             content:
               application/json:
                 schema:
-                  type: string
-
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: "Coupon stored successfully."
 
     /v1/coupons/claim:
       get:
@@ -39,7 +42,12 @@
             content:
               application/json:
                 schema:
-                  type: string
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: "Coupon claimed successfully. Coupon code: {couponCode}, Expiry time: {expiryTime}."
+
 
     /v1/coupons/{couponCode}/status:
       get:
@@ -55,7 +63,12 @@
             content:
               application/json:
                 schema:
-                  type: string
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: "Coupon is available for claiming."
+
 
     /v1/coupons/device/{deviceId}/status:
       get:
@@ -71,7 +84,12 @@
             content:
               application/json:
                 schema:
-                  type: string
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: "Device {deviceId} has not claimed any coupon."
+
 
     /v1/coupons/all:
       get:
